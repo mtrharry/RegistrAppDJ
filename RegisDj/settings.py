@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'rest_api',
+    'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
@@ -50,7 +52,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     
+]
+CORS_ALLOW_ALL_ORIGINS = True  
+
+CORS_ALLOWED_ORIGINS = [
+    
+    "http://localhost:8100",
 ]
 
 ROOT_URLCONF = 'RegisDj.urls'
@@ -80,7 +89,7 @@ WSGI_APPLICATION = 'RegisDj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'admin',
+        'NAME': 'registrappbd',
         'USER': 'root',
         'PASSWORD': 'Ruizharry32.',
         'HOST':'localhost',
