@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Usuario,Asignatura
+from core.models import Usuario,Asignatura,Asistencia
 class AsignaturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asignatura
@@ -10,3 +10,8 @@ class usuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = ['idUsuario','nombreUsuario', 'contraseña','categoria','email','asignaturas']
+
+class AsistenciaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asistencia
+        fields = ['estudiante', 'asignatura', 'fecha', 'hora']

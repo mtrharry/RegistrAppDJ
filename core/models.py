@@ -27,3 +27,12 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.nombreUsuario
+
+class Asistencia(models.Model):
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario que asiste")
+    asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE, verbose_name="Asignatura de la asistencia")
+    fecha = models.DateField(verbose_name="Fecha de la asistencia")
+    hora = models.TimeField(verbose_name="Hora de registro")
+
+    def __str__(self):
+        return f"{self.usuario} - {self.asignatura} - {self.fecha} - {self.hora}"

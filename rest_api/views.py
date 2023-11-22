@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from core.models import Usuario
-from .serializers import usuarioSerializer, AsignaturaSerializer
+from .serializers import usuarioSerializer, AsignaturaSerializer,AsistenciaSerializer
 from rest_framework import generics
 
 @csrf_exempt
@@ -24,3 +24,16 @@ class AsignaturasDocenteView(generics.ListAPIView):
         # Obtener las asignaturas asociadas a ese docente
         asignaturas = Usuario.objects.get(idUsuario=id_docente).asignaturas.all()
         return asignaturas
+    
+@api_view(['POST'])
+def escanear_qr(request):
+    # Lógica para procesar el escaneo de QR y confirmar asistencia
+    # Aquí deberás extraer la información del QR, asociarla con el estudiante y guardar la asistencia en la base de datos
+    # ...
+
+    # Ejemplo de cómo podrías usar el modelo Asistencia
+    serializer = AsistenciaSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
