@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from core.models import Usuario
 from .serializers import usuarioSerializer, AsignaturaSerializer,AsistenciaSerializer
 from rest_framework import generics
+from datetime import datetime
 
 @csrf_exempt
 @api_view(['GET'])
@@ -27,9 +28,15 @@ class AsignaturasDocenteView(generics.ListAPIView):
     
 @api_view(['POST'])
 def escanear_qr(request):
-    # Lógica para procesar el escaneo de QR y confirmar asistencia
-    # Aquí deberás extraer la información del QR, asociarla con el estudiante y guardar la asistencia en la base de datos
-    # ...
+    # Imprimir los datos recibidos
+    print("Datos recibidos:", request.data)
+
+    # Obtener la fecha en el formato correcto
+    fecha_str = request.data.get('fecha', '')
+    fecha_obj = datetime.strptime(fecha_str, '%d-%m-%Y').date()
+
+    # Actualizar la fecha en los datos antes de pasar al serializador
+    request.data['fecha'] = fecha_obj
 
     # Ejemplo de cómo podrías usar el modelo Asistencia
     serializer = AsistenciaSerializer(data=request.data)

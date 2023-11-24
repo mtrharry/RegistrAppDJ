@@ -29,8 +29,9 @@ class Usuario(models.Model):
         return self.nombreUsuario
 
 class Asistencia(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario que asiste")
-    asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE, verbose_name="Asignatura de la asistencia")
+    
+    usuario = models.CharField(max_length=50, verbose_name="Nombre de usuario")
+    asignatura = models.CharField(max_length=50, verbose_name="Asignatura")
     fecha = models.DateField(verbose_name="Fecha de la asistencia")
     hora = models.TimeField(verbose_name="Hora de registro")
 

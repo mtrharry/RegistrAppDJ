@@ -14,4 +14,4 @@ class usuarioSerializer(serializers.ModelSerializer):
 class AsistenciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Asistencia
-        fields = ['estudiante', 'asignatura', 'fecha', 'hora']
+        fields = ['usuario', 'asignatura', 'fecha', 'hora']
